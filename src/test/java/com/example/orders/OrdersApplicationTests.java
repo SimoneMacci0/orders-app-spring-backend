@@ -46,7 +46,7 @@ public class OrdersApplicationTests {
         	.accept(MediaType.APPLICATION_JSON))
       		.andExpect(status().isCreated())
 			.andDo(print())
-      		.andExpect(MockMvcResultMatchers.jsonPath("$.description").value("muck"))
+      		.andExpect(MockMvcResultMatchers.jsonPath("$.description").value("mock"))
       		.andExpect(MockMvcResultMatchers.jsonPath("$.status").value("IN_PROGRESS"));
 	}
 
