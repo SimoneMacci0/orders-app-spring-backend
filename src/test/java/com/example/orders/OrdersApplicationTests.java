@@ -45,6 +45,7 @@ public class OrdersApplicationTests {
 			.contentType(MediaType.APPLICATION_JSON).content(asJsonString(testOrder))
         	.accept(MediaType.APPLICATION_JSON))
       		.andExpect(status().isCreated())
+			.andDo(print())
       		.andExpect(MockMvcResultMatchers.jsonPath("$.description").value("mock"))
       		.andExpect(MockMvcResultMatchers.jsonPath("$.status").value("IN_PROGRESS"));
 	}
