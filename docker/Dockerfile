@@ -1,3 +1,4 @@
+# STEP 1: build
 FROM quay.io/devfile/maven:3.8.1-openjdk-17-slim
 
 WORKDIR /build
@@ -14,7 +15,9 @@ RUN grep version /build/target/maven-archiver/pom.properties | cut -d '=' -f2 >.
 RUN grep artifactId /build/target/maven-archiver/pom.properties | cut -d '=' -f2 >.env-id
 RUN mv /build/target/$(cat .env-id)-$(cat .env-version).jar /build/target/export-run-artifact.jar
 
-COPY /build/target/export-run-artifact.jar  /app/target/export-run-artifact.jar
+# STEP 2: run 
+FROM openjdk:17.0.1-jdk-slim
+COPY --from=0 /build/target/export-run-artifact.jar  /app/target/export-run-artifact.jar
 
 EXPOSE 8080
 ENTRYPOINT [ "java", "-jar", "/app/target/export-run-artifact.jar", "--server.port=8080" ]
