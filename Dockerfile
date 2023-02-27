@@ -25,7 +25,6 @@ RUN grep version /build/target/maven-archiver/pom.properties | cut -d '=' -f2 >.
 RUN grep artifactId /build/target/maven-archiver/pom.properties | cut -d '=' -f2 >.env-id
 RUN mv /build/target/$(cat .env-id)-$(cat .env-version).jar /build/target/export-run-artifact.jar
 
-FROM openjdk:17-jdk
 COPY --from=0 /build/target/export-run-artifact.jar  /app/target/export-run-artifact.jar
 
 EXPOSE 8080
