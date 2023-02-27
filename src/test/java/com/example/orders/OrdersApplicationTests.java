@@ -27,8 +27,11 @@ public class OrdersApplicationTests {
 
 	@Test
 	public void shouldCheckTestOrder() throws Exception {
-		this.mockMvc.perform(get("/orders")).andDo(print()).andExpect(status().isOk())
-				.andExpect(content().string(containsString("TEST")));
+		this.mockMvc
+			.perform(get("/orders"))
+			.andDo(print())
+			.andExpect(status().isOk())
+			.andExpect(content().string(containsString("TEST")));
 	}
 
 	@Test
