@@ -1,5 +1,7 @@
 package com.example.orders;
 
+import java.util.stream.StreamSupport;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -16,11 +18,14 @@ class LoadDatabase {
 
     return args -> {
         
-      orderRepository.save(new Order("TEST", Status.COMPLETED));
-      orderRepository.findAll().forEach(order -> {
-        log.info("Preloaded " + order);
-      });
-
+      // If database empty, add test item..
+      if(StreamSupport.stream(orderRepository.findAll().spliterator(), false).count() == 0) {
+        orderRepository.save(new Order("TEST", Status.COMPLETED));
+        orderRepository.findAll().forEach(order -> {
+          log.info("Preloaded " + order);
+        });
+      }  
+       
     };
   }
 }

@@ -2,6 +2,7 @@ package com.example.orders;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,6 +18,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.hateoas.mediatype.problem.Problem;
 import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -25,6 +27,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 @RestController
 class OrderController {
 
+  @Autowired
   private final OrderRepository orderRepository;
   private final OrderModelAssembler assembler;
 
@@ -37,7 +40,7 @@ class OrderController {
   @GetMapping("/orders")
   CollectionModel<EntityModel<Order>> all() {
 
-    List<EntityModel<Order>> orders = orderRepository.findAll().stream() //
+    List<EntityModel<Order>> orders = StreamSupport.stream(orderRepository.findAll().spliterator(), false) //
         .map(assembler::toModel) //
         .collect(Collectors.toList());
 
