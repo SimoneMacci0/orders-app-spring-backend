@@ -8,7 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "CUSTOMER_ORDER")
+@Table(name = "CUSTOMER_ORDERS")
 class Order {
 
   private @Id @GeneratedValue Long id;
