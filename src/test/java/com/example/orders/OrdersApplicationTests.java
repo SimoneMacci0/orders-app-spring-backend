@@ -38,7 +38,7 @@ public class OrdersApplicationTests {
 	public void shouldAddOrder() throws Exception {
 
 		Order testOrder = new Order();
-		testOrder.setDescription("mock");
+		testOrder.setDescription("test2");
 
 		this.mockMvc
 			.perform(post("/orders")
@@ -46,7 +46,7 @@ public class OrdersApplicationTests {
         	.accept(MediaType.APPLICATION_JSON))
       		.andExpect(status().isCreated())
 			.andDo(print())
-      		.andExpect(MockMvcResultMatchers.jsonPath("$.description").value("mock"))
+      		.andExpect(MockMvcResultMatchers.jsonPath("$.description").value("test2"))
       		.andExpect(MockMvcResultMatchers.jsonPath("$.status").value("IN_PROGRESS"));
 	}
 
