@@ -67,6 +67,6 @@ class Order {
 
   @Override
   public String toString() {
-    return "Order: {" + "id=" + this.id + ", description='" + this.description + '\'' + ", status=" + this.status + '}';
+    return "Order:{" + "id=" + this.id + ", description='" + this.description + '\'' + ", status=" + this.status + '}';
   }
 }
